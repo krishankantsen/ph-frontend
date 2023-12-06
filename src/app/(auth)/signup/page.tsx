@@ -15,8 +15,7 @@ const theme = createTheme();
 /* eslint-disable */
 const emailrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-const passrex =
-  /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+const passrex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
 const SignUp = () => {
   const router = useRouter();
@@ -69,7 +68,7 @@ const SignUp = () => {
           sx={{
             marginTop: 16,
             display: "flex",
-            mb:1,
+            mb: 1,
             flexDirection: "column",
             alignItems: "center",
             boxShadow: 3,

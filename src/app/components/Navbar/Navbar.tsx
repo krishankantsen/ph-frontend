@@ -1,6 +1,5 @@
 "use client";
-import { Box, Button, Stack, Toolbar, Typography } from "@mui/material";
-import Link from "next/link";
+import { Button, Stack, Toolbar, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 export const Navbar = () => {
   const router = useRouter();
@@ -21,6 +20,7 @@ export const Navbar = () => {
         width: "99%",
         zIndex: 1000,
       }}
+      style={{ minHeight: "48px" }}
     >
       <Typography
         variant="h5"
@@ -68,7 +68,6 @@ export const Navbar = () => {
 
           <Button
             variant="contained"
-            
             onClick={() => {
               router.push("/signup");
             }}

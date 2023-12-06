@@ -48,14 +48,12 @@ const SignIn = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" >
-
-
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 16,
-            mb:1,
+            mb: 1,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -117,7 +115,6 @@ const SignIn = () => {
             </span>
           </Typography>
         </Box>
-        
       </Container>
     </ThemeProvider>
   );
