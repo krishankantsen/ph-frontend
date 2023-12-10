@@ -3,8 +3,8 @@ import { Button, Stack, Toolbar, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 export const Navbar = () => {
   const router = useRouter();
-  const isLoggedIn = localStorage.getItem("token");
-
+  const isLoggedIn =
+    typeof window !== "undefined" && localStorage.getItem("token");
   return (
     <Toolbar
       sx={{
@@ -16,7 +16,6 @@ export const Navbar = () => {
         boxShadow: 3,
         m: 1,
         position: "fixed",
-
         width: "99%",
         zIndex: 1000,
       }}
@@ -33,7 +32,6 @@ export const Navbar = () => {
       >
         PulseHub
       </Typography>
-
       {isLoggedIn ? (
         <Stack direction="row" spacing={2}>
           <Button
@@ -65,7 +63,6 @@ export const Navbar = () => {
           >
             SignIn
           </Button>
-
           <Button
             variant="contained"
             onClick={() => {

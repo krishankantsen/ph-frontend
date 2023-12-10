@@ -1,20 +1,18 @@
 "use client";
 import {
+  Box,
   Button,
   Container,
   CssBaseline,
   TextField,
   Typography,
-  Box,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-
 const theme = createTheme();
 /* eslint-disable */
 const emailrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
 const passrex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
 const SignUp = () => {
@@ -25,13 +23,11 @@ const SignUp = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!emailrex.test(email)) {
-      alert("Enter Valid Email");
-      return;
+      return alert("Enter Valid Email");
     } else if (!passrex.test(password)) {
-      alert(
+      return alert(
         "Password should be 8 characters long and must contain Uppercase, Lowercase, Number, and Special Character"
       );
-      return;
     }
     try {
       const response = await fetch("http://localhost:5000/signup/", {
@@ -39,24 +35,18 @@ const SignUp = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        // sending data to backend
         body: JSON.stringify({ name, email, password }),
       });
 
       const data = await response.json();
 
-      if (data.error) {
-        alert(data.error);
-        return;
-      } else {
-        alert(data.success);
-      }
+      if (data.error) return alert(data.error);
+      else alert(data.success);
 
       router.push("/signin");
       router.refresh();
     } catch (error) {
       console.error("Error during form submission:", error);
-      // Handle error as needed
     }
   };
 
