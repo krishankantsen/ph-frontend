@@ -1,5 +1,6 @@
-import { Navbar } from "./components/Navbar/Navbar";
 import "./globals.css";
+
+import { Navbar } from "./components/Navbar/Navbar";
 export const metadata = {
   title: "PulseHub",
   description: "Social Media Plateform",

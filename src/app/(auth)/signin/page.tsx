@@ -1,18 +1,16 @@
 "use client";
 import {
+  Box,
   Button,
   Container,
   CssBaseline,
   TextField,
   Typography,
-  Box,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-
 const theme = createTheme();
-
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,16 +23,11 @@ const SignIn = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        // sending data to backend
         body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
-
       if (data.error) {
-        alert(data.error);
-
-        return;
+        throw new Error(data.error);
       } else {
         localStorage.setItem("token", data.token);
         alert(data.success);
@@ -42,10 +35,9 @@ const SignIn = () => {
         router.refresh();
       }
     } catch (error) {
-      console.error("Error during form submission:", error);
+      alert(error);
     }
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -100,7 +92,7 @@ const SignIn = () => {
             </Button>
           </Box>
           <Typography>
-            Dont Have Account ?{" "}
+            Dont Have Account ?
             <span
               onClick={() => {
                 router.push("/signup");
@@ -119,5 +111,4 @@ const SignIn = () => {
     </ThemeProvider>
   );
 };
-
 export default SignIn;
