@@ -1,22 +1,30 @@
 "use client";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
   Button,
-  Container,
-  CssBaseline,
+  IconButton,
+  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
-const theme = createTheme();
+import { useState } from "react";
+import { toast } from "sonner";
+
+import img from "../bgimage.jpg";
+
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+  const handleSubmit = async () => {
     try {
       const response = await fetch("http://localhost:5000/signin/", {
         method: "POST",
@@ -30,40 +38,66 @@ const SignIn = () => {
         throw new Error(data.error);
       } else {
         localStorage.setItem("token", data.token);
-        alert(data.success);
-        router.push("/");
+        toast.success("Login Successfully", {
+          duration: 1000,
+        });
+        router.push("/userHome");
         router.refresh();
       }
     } catch (error) {
-      alert(error);
+      toast.error(`${error}`, {
+        duration: 1000,
+      });
     }
   };
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Box
+        sx={{
+          height: ["86%","85%","75%"],
+          width: ["95%","75%","75%"],
+          display: "flex",
+          flexDirection: ["column-reverse", "row", "row"],
+          borderRadius: "24px",
+          boxShadow: "0px 12px 50px #9181F4",
+        }}
+      >
         <Box
           sx={{
-            marginTop: 16,
-            mb: 1,
+            width: ["100%", "50%", "50%"],
+            height: ["50%", "100%", "100%"],
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            boxShadow: 3,
-            p: 5,
-            borderRadius: "16px",
-            backgroundColor: "white",
+            justifyContent: "center",
+            mt:[0,0,3]
           }}
         >
-          <Typography component="h1" variant="h5" sx={{ fontWeight: "bold" }}>
-            SignIn to you Account
-          </Typography>
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-            textAlign="center"
+            sx={{
+              width: ["100%", "100%", "60%"],
+              height: ["100%", "100%", "50%"],
+              display: "flex",
+              flexDirection: "column",
+
+              pt: [0, 25, 0],
+              gap: [0, 1, 2],
+            }}
           >
+            <Typography
+              variant="h3"
+              fontWeight={"bold"}
+              fontFamily={"Geist Mono, monospace"}
+              sx={{ textAlign: "center", color: "#8418F6" }}
+            >
+              LOGIN
+            </Typography>
             <TextField
               margin="normal"
               required
@@ -74,6 +108,13 @@ const SignIn = () => {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              sx={{
+                border: "none",
+                borderRadius: "24px",
+                "& fieldset": { border: "none" },
+                bgcolor: "#F0EDFF",
+                fontFamily: "Geist Mono, monospace",
+              }}
             />
             <TextField
               margin="normal"
@@ -81,34 +122,81 @@ const SignIn = () => {
               fullWidth
               name="password"
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                sx: {
+                  border: "none",
+                  fontFamily: "Geist Mono, monospace",
+                  "& fieldset": { border: "none" },
+                  bgcolor: "#F0EDFF",
+                  borderRadius: "24px",
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleTogglePasswordVisibility}>
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
-            </Button>
-          </Box>
-          <Typography>
-            Dont Have Account ?
-            <span
-              onClick={() => {
-                router.push("/signup");
-              }}
-              style={{
-                cursor: "pointer",
-                color: "#1976d2",
+            <Button
+              variant="contained"
+              sx={{
                 fontWeight: "bold",
+                fontFamily: "Geist Mono, monospace",
+                background:
+                  "linear-gradient(90deg, hsla(248, 84%, 73%, 1) 0%, hsla(248, 83%, 57%, 1) 100%)",
+                alignSelf: "center",
+                borderRadius: "14px",
+                boxShadow: "0px 8px 12px #5038ED",
+                mb: 2,
               }}
+              onClick={handleSubmit}
+            >
+              Login Now
+            </Button>
+
+            <Typography
+              textAlign={"center"}
+              fontFamily={"Geist Mono, monospace"}
+            >
+              {" "}
+              ---------Dont Have Account ?---------{" "}
+            </Typography>
+            <Typography
+              textAlign={"center"}
+              variant="h6"
+              fontWeight={"bold"}
+              sx={{
+                color: "#7D55F5",
+                cursor: "pointer",
+                fontFamily: "Geist Mono, monospace",
+              }}
+              onClick={() => router.push("/signup")}
             >
               SignUp
-            </span>
-          </Typography>
+            </Typography>
+          </Box>
         </Box>
-      </Container>
-    </ThemeProvider>
+        <Box
+          sx={{
+            width: ["100%", "50%", "50%"],
+            height: ["50%", "100%", "100%"],
+          }}
+        >
+          <Image
+            src={img}
+            alt="side-picture"
+            style={{ width: "100%", height: "100%", borderRadius: "24px" }}
+          ></Image>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 export default SignIn;
