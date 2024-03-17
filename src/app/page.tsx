@@ -1,9 +1,7 @@
 "use client";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import img from "./components/images/bgs.jpg";
 
 export default function Home() {
   const router = useRouter();
@@ -26,19 +24,20 @@ export default function Home() {
         sx={{
           justifyContent: ["", "", "center"],
           display: "flex",
-          width: ["100%", "50%", "50%"],
-          height: ["50%", "100%", "100%"],
+          width: ["100%", "100%", "100%"],
+          height: ["100%", "100%", "100%"],
         }}
       >
         <Stack spacing={1} sx={{ mt: [10, 24, 24], zIndex: 1000, ml: 1 }}>
           <Typography
             variant="h3"
-            fontFamily={"Geist Mono, monospace"}
-            color={"#8418F6"}
+            fontFamily={"Rubik,sans-serif"}
+            color={"#8b54c4"}
             sx={{
               "@media (max-width:600px)": {
                 fontSize: "2rem",
               },
+              textAlign:"center"
             }}
           >
             Welcome To
@@ -46,7 +45,7 @@ export default function Home() {
           <Stack direction="row" spacing={0}>
             <Typography
               variant="h1"
-              fontFamily={"Geist Mono, monospace"}
+              fontFamily={"Rubik,sans-serif"}
               fontWeight="bolder"
               sx={{
                 "@media (max-width:600px)": {
@@ -59,8 +58,8 @@ export default function Home() {
             <Typography
               variant="h1"
               fontWeight="bolder"
-              fontFamily={"Geist Mono, monospace"}
-              color={"#8418F6"}
+              fontFamily={"Rubik,sans-serif"}
+              color={"#8b54c4"}
               sx={{
                 "@media (max-width:600px)": {
                   fontSize: "4rem",
@@ -78,10 +77,10 @@ export default function Home() {
               mb: 2,
               fontWeight: "bold",
               background:
-                "linear-gradient(90deg, hsla(248, 84%, 73%, 1) 0%, hsla(248, 83%, 57%, 1) 100%)",
-              alignSelf: "start",
+                "#8b54c4",
+              alignSelf: "center",
               borderRadius: "14px",
-              boxShadow: "0px 8px 12px #5038ED",
+              "&:hover": { bgcolor: "#8b54c4", transform: "scale(1.05)" },
             }}
             onClick={() => {
               router.push("/signup");
@@ -91,7 +90,7 @@ export default function Home() {
           </Button>
         </Stack>
       </Box>
-      <Box
+      {/* <Box
           sx={{
             justifyContent: "center",
             alignItems: "center",
@@ -106,7 +105,7 @@ export default function Home() {
             alt="home-picture"
             style={{ width: "100%", height: "100vh" }}
           ></Image>
-        </Box>
+        </Box> */}
     </Box>
   );
 }

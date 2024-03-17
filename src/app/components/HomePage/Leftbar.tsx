@@ -28,9 +28,8 @@ const Leftbar = () => {
           width: ["0%", "60%", "60%"],
           height: "35%",
           bgcolor: "white",
-          borderRadius: "16px",
+          borderRadius: "12px",
           p: 1,
-          boxShadow: "0px 4px 10px rgb(80, 56, 237,0.3)",
           gap: 2,
         }}
       >
@@ -47,14 +46,14 @@ const Leftbar = () => {
             <Image
               src={user.profilePic}
               alt="profile-photo"
-              width={150}
-              height={150}
+              width={100}
+              height={100}
               style={{ borderRadius: "50%" }}
             />
           )}
         </Box>
         <Typography
-          variant="h4"
+          variant="h6"
           fontWeight={"bold"}
           sx={{ textAlign: "center" }}
         >
@@ -114,11 +113,9 @@ const Leftbar = () => {
           <Button
             variant="contained"
             sx={{
-              fontWeight: "bold",
-              fontFamily: "Geist Mono, monospace",
-              background:
-                "linear-gradient(90deg, hsla(248, 84%, 73%, 1) 0%, hsla(248, 83%, 57%, 1) 100%)",
-              boxShadow: "0px 8px 10px #5038ED",
+              fontFamily:"Rubik,sans-serif",
+              bgcolor:"#8b54c4",
+              "&:hover": { bgcolor: "#8b54c4", transform: "scale(1.01)" },
             }}
             onClick={() => router.push("/profile")}
           >

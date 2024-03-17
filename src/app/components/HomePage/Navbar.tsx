@@ -15,24 +15,25 @@ export const Navbar = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        height: "70px",
+        height: "50px",
         position: "fixed",
-        width: "100%",
+        // border:"0.5px solid grey",
+        bgcolor:"white",
+        width:"100vw",
         zIndex: 1000,
         p:2
       }}
       style={{ minHeight: "48px" }}
     >
       <Typography
-        variant="h4"
-        fontWeight="bold"
-        fontFamily={"Geist Mono, monospace"}
-        style={{
+        fontSize="clamp(1rem, 2rem, 2.25rem)"
+        fontWeight="700"
+        fontFamily="Rubik,sans-serif"
+                style={{
           cursor: "pointer",
           justifyContent: "center",
           display: "flex",
           alignItems: "center",
-          color: "#8418F6",
         }}
         onClick={() => {
           if (localStorage.getItem("token")) {
@@ -44,17 +45,25 @@ export const Navbar = () => {
           }
         }}
       >
-        PulseHub
+        Pulse <Typography fontWeight="700" style={{
+          cursor: "pointer",
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          color: "#8b54c4",
+        }} fontSize="clamp(1rem, 2rem, 2.25rem)"
+       >Hub</Typography>
       </Typography>
       {isLoggedIn ? (
         <Stack direction="row" spacing={2}>
           <Typography
-            fontWeight="bold"
-            variant="h5"
-            fontFamily={"Geist Mono, monospace"}
+            fontFamily={"Rubik,sans-serif"}
+            variant="h6"
+            fontWeight={"700"}
             sx={{
               cursor: "pointer",
-              "&:hover": { color: "#8418F6", transform: "scale(1.15)" },
+              color:"#545454",
+              "&:hover": { color: "#8b54c4", transform: "scale(1.05)" },
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
@@ -77,13 +86,14 @@ export const Navbar = () => {
               });
             }}
             fontWeight="bold"
-            variant="h5"
-            fontFamily={"Geist Mono, monospace"}
+            variant="h6"
+            fontFamily={"Rubik,sans-serif"}
             sx={{
               cursor: "pointer",
-              "&:hover": { color: "#8418F6", transform: "scale(1.15)" },
+              "&:hover": { color: "#8b54c4", transform: "scale(1.05)" },
               display: "flex",
               flexDirection: "row",
+              color:"#545454",
               alignItems: "center",
             }}
           >
@@ -97,28 +107,30 @@ export const Navbar = () => {
             onClick={() => {
               router.push("/signin");
             }}
-            fontWeight="bold"
-            variant="h5"
+            fontFamily={"Rubik,sans-serif"}
+            variant="h6"
+            fontWeight={"700"}
             sx={{
               cursor: "pointer",
-              "&:hover": { color: "#8418F6", transform: "scale(1.15)" },
+              color:"#545454",
+              "&:hover": { color: "#8b54c4", transform: "scale(1.05)" },
             }}
-            fontFamily={"Geist Mono, monospace"}
           >
             SignIn
           </Typography>
           <Typography
-            fontWeight="bold"
-            variant="h5"
             alignItems={"center"}
             onClick={() => {
               router.push("/signup");
             }}
             sx={{
               cursor: "pointer",
-              "&:hover": { color: "#8418F6", transform: "scale(1.15)" },
+              color:"#545454",
+              "&:hover": { color: "#8b54c4", transform: "scale(1.05)" },
             }}
-            fontFamily={"Geist Mono, monospace"}
+            fontFamily={"Rubik,sans-serif"}
+            variant="h6"
+            fontWeight={"700"}
           >
             SignUp
           </Typography>

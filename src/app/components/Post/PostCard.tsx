@@ -1,11 +1,15 @@
 import CommentIcon from "@mui/icons-material/Comment";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import { Badge, Box, TextField, Typography } from "@mui/material";
+import { Box,TextField, Typography } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
-
+import { useState } from "react";
+import { useSelector } from "react-redux";
 export default function PostCard(props: any) {
+  const user =useSelector((state:any)=>state.user.user);
   const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const [isLiked, setIsLiked] = useState(false);
   const addLike = async (postId: any) => {
     try {
       const response = await fetch(`http://localhost:5000/like`, {
@@ -14,17 +18,18 @@ export default function PostCard(props: any) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body:JSON.stringify({postId}),
+        body: JSON.stringify({ postId }),
       });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+
+      if (response.ok) {
+        setIsLiked(!isLiked);
+        console.log("Liked");
       } else {
-        console.log("liked");
+        throw new Error("Network response was not ok");
       }
     } catch (err) {
       console.log(err);
     }
-    return postId;
   };
 
   return (
@@ -38,8 +43,7 @@ export default function PostCard(props: any) {
         maxHeight: "70%",
         p: 2,
         gap: 1,
-        marginLeft: "16px",
-        boxShadow: "0px 4px 10px rgb(80, 56, 237,0.3)",
+        marginLeft: "12px",
       }}
     >
       <Box
@@ -70,8 +74,9 @@ export default function PostCard(props: any) {
           ></Image>
           <Typography sx={{ display: "flex", flexDirection: "column", ml: 1 }}>
             <Typography
-              fontWeight={"bold"}
-              fontFamily={"Geist Mono, monospace"}
+               fontFamily={"Rubik,sans-serif"}
+               fontWeight={"700"}
+               color={"#545454"}
             >
               {props.name}
             </Typography>
@@ -92,7 +97,8 @@ export default function PostCard(props: any) {
             ml: 1,
           }}
         >
-          <Typography fontFamily={"Geist Mono, monospace"}>
+          <Typography fontFamily={"Rubik,sans-serif"}
+      >
             {props.body}
           </Typography>
         </Box>
@@ -111,6 +117,7 @@ export default function PostCard(props: any) {
             src={props.photo}
             alt="post-picture"
             width={0}
+            priority
             height={0}
             sizes="100vw"
             style={{
@@ -142,13 +149,15 @@ export default function PostCard(props: any) {
             paddingBottom: "4px",
           }}
         >
-          <Badge badgeContent={props.likeCount} color="primary">
-            <FavoriteBorderRoundedIcon
+            {isLiked?<FavoriteIcon
+            sx={{ cursor: "pointer" }}
+            fontSize="medium"
+            onClick={() => addLike(props.postId)}/>:<FavoriteBorderRoundedIcon
               sx={{ cursor: "pointer" }}
               fontSize="medium"
               onClick={() => addLike(props.postId)}
-            />
-          </Badge>
+            />}
+
           <CommentIcon fontSize="medium" />
         </Box>
         <Box
@@ -160,11 +169,12 @@ export default function PostCard(props: any) {
             gap: 1,
           }}
         >
-          {props?.userProfilepic && (
+          {user.profilePic && (
             <Image
-              src={props.userProfilepic}
+              src={user.profilePic}
               alt="profile"
               width={40}
+              priority
               height={40}
               style={{ borderRadius: "50%" }}
             />
@@ -176,9 +186,8 @@ export default function PostCard(props: any) {
               width: "100%",
               height: "%",
               borderRadius: "25px",
-              bgcolor: "#F0EDFF",
               fontFamily: "Geist Mono, monospace",
-              border: "none",
+              border: "1px solid grey",
               fontSize: "15px",
               "& fieldset": { border: "none" },
             }}
@@ -187,7 +196,7 @@ export default function PostCard(props: any) {
           <Typography
             sx={{
               cursor: "pointer",
-              color: "#8418F6",
+              color: "#8b54c4",
               fontWeight: "bold",
               fontFamily: "Geist Mono, monospace",
             }}

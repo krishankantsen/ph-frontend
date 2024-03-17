@@ -94,8 +94,7 @@ export default function CreatePost() {
           borderRadius: "16px",
           height: "20%",
           p: 1,
-          boxShadow: "0px 4px 10px rgb(80, 56, 237,0.3)",
-          marginLeft: "16px",
+          marginLeft: "12px",
         }}
       >
         <Box
@@ -128,9 +127,9 @@ export default function CreatePost() {
               height: "80%",
               margin: "10px",
               borderRadius: "25px",
-              bgcolor: "#F0EDFF",
+              border:"1px solid grey",
               fontFamily: "Geist Mono, monospace",
-              border: "none",
+
               "& fieldset": { border: "none" },
             }}
             placeholder="Write Your Thoughts........"
@@ -149,7 +148,7 @@ export default function CreatePost() {
           <Button
             component="label"
             sx={{
-              color: "black",
+              color:"#545454",
               gap: 1,
               fontWeight: "bold",
               fontFamily: "Geist Mono, monospace",
@@ -159,7 +158,7 @@ export default function CreatePost() {
             <Input
               type="file"
               onChange={handleImageChange}
-              sx={{ display: "none" }}
+              sx={{ display: "none", }}
             />
             Image
           </Button>
@@ -177,11 +176,11 @@ export default function CreatePost() {
             variant="contained"
             startIcon={<Send />}
             sx={{
-              boxShadow: "0px 2px 5px #5038ED",
               mr: 2,
-              fontWeight: "bold",
-              background:
-                "linear-gradient(90deg, hsla(248, 84%, 73%, 1) 0%, hsla(248, 83%, 57%, 1) 100%)",
+                color: "#FFFFFF",
+                backgroundColor:  "#9968cc",
+                borderRadius: "3rem",
+                "&:hover": { bgcolor: "#8b54c4", transform: "scale(1.01)" },
             }}
             onClick={handleAddPost}
           >
