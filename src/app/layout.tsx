@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { GeistMono } from "geist/font/mono";
+import { Rubik } from 'next/font/google';
 import { Toaster } from "sonner";
 
 import { StoreProvider } from "@/store/StoreProvider";
@@ -11,7 +11,7 @@ export const metadata = {
   title: "PulseHub",
   description: "Social Media Plateform",
 };
-
+const rubik = Rubik({ subsets: ['latin'] });
 export default function RootLayout({
   children,
 }: {
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <StoreProvider>
-    <html lang="en" className={GeistMono.className}>
+    <html lang="en" className={rubik.className} style={{backgroundColor:"#ededed",color:"#545454"}}>
       <body>
         <Navbar />
         {children}
